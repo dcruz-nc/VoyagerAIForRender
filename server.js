@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Your Discord webhook URL
-const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1387181629117562920/pFslAHwA_g-6f5mXq8_ztdvUJs5NtDySIbKW5RTANuZ6hlQUwrUQA0qwpkg3TNaseP61';
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1387206644651262042/PYNJdYVWb4_p6GazYeRMXNwZu73iBB4Nd7oPyMhELYTG8KzJt2G2km6ZdoS3i_vHZDPs';
 
 // POST endpoint to receive contact form submissions
 app.post('/api/contact', async (req, res) => {
