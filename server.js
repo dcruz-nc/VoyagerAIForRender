@@ -1,8 +1,13 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
 
 const app = express();
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
+
+
 
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
@@ -10,9 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Your Discord webhook URL
-const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1387206644651262042/PYNJdYVWb4_p6GazYeRMXNwZu73iBB4Nd7oPyMhELYTG8KzJt2G2km6ZdoS3i_vHZDPs';
 
 // POST endpoint to receive contact form submissions
 app.post('/api/contact', async (req, res) => {
