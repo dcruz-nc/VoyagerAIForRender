@@ -205,6 +205,11 @@ header.hero.small {
   color: #212529;
 }
 
+.featured-cars .car-card img {
+  max-width: 320px;
+  aspect-ratio: 2 / 1;
+}
+
 .price {
   color: #007BFF;
   font-weight: 700;
