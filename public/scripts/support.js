@@ -45,3 +45,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+// Toggle chat visibility
+document.getElementById('chat-toggle').addEventListener('click', () => {
+  const chatBox = document.getElementById('chat-box');
+  chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Send message to OpenAI backend
+document.getElementById('chat-send-btn').addEventListener('click', async () => {
+  const input = document.getElementById('user-input');
+  const message = input.value.trim();
+  if (!message) return;
+
+  appendMessage('You', message);
+  input.value = '';
+  appendMessage('VoyagerAi', 'Typing...');
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+    document.getElementById('chat-messages').lastChild.remove(); // Remove "Typing..."
+    appendMessage('VoyagerAi', data.reply);
+  } catch (err) {
+    console.error('Chat error:', err);
+    appendMessage('VoyagerAi', 'Something went wrong. Try again later.');
+  }
+});
+
+function appendMessage(sender, text) {
+  const container = document.getElementById('chat-messages');
+  const messageElem = document.createElement('div');
+  messageElem.textContent = `${sender}: ${text}`;
+  container.appendChild(messageElem);
+  container.scrollTop = container.scrollHeight;
+}
